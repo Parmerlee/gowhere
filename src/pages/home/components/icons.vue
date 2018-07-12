@@ -2,12 +2,12 @@
   <div class="icons">
     <swiper>
       <!--利用computed函数计算出需要循环的页码以及每个页码里包含的元素，从而控制页面的滑动；然后再具体取值具体展示-->
-      <swiper-slide v-for="(page1,index) of pages" :key="index">
-        <div class="icon" v-for="item of page1" :key="item.id">
+      <swiper-slide v-for="(page,index) of pages" :key="index">
+        <div class="icon" v-for="item of page" :key="item.id">
           <div class="icon-img">
             <img class="img-icon-content" :src="item.imgUrl"/>
           </div>
-          <p class="icon-desc">{{item.des}}</p>
+          <p class="icon-desc">{{item.desc}}</p>
         </div>
       </swiper-slide>
     </swiper>
@@ -18,6 +18,9 @@ import SwiperSlide from '../../../../node_modules/vue-awesome-swiper/src/slide'
 export default{
   components: {SwiperSlide},
   name: 'HomeIcons',
+  props: {
+    iconList1: Array
+  },
   computed: {
     pages () {
       const pages = []
