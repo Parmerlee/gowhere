@@ -40,7 +40,7 @@ export default {
         this.hotcities = data.hotCities
       }
     },
-    alphaClick(res) {
+    alphaClick (res) {
       this.alpha = res
     }
   },
@@ -48,7 +48,7 @@ export default {
     return {
       cities: {},
       hotcities: [],
-      alpha:''
+      alpha: ''
     }
   }
 }

@@ -47,8 +47,8 @@ export default {
   },
   watch: {
     alpha () {
-      if (this.alpha){
-        const ele=this.$refs[this.alpha][0]
+      if (this.alpha) {
+        const ele = this.$refs[this.alpha][0]
         this.scroll.scrollToElement(ele)
       }
     }
