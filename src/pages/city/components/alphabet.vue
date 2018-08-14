@@ -5,7 +5,7 @@
     @click = "clickListener"
     @touchstart = 'touchstart'
     @touchmove = 'touchmove'
-    @touchend = 'touchstend'
+    @touchend = 'touchend'
     >{{item}}</li>
   </ul>
 </template>
@@ -18,7 +18,9 @@ export default {
   },
   data () {
     return {
-      state: false
+      state: false,
+      startY: 0,
+      timer: null
     }
   },
   methods: {
@@ -30,12 +32,16 @@ export default {
     },
     touchmove (e) {
       if (this.state) {
-        const startY = this.$refs['A'][0].offsetTop
-        const touchY = e.touches[0].clientY - 74
-        const index = Math.floor((touchY - startY) / 20)
-        if (index >= 0 && index < this.letters.length) {
-          this.$emit('alpha', this.letters[index])
+        if (this.timer) {
+          clearTimeout(this.timer)
         }
+        this.timer = setTimeout(() => {
+          const touchY = e.touches[0].clientY - 74
+          const index = Math.floor((touchY - this.startY) / 20)
+          if (index >= 0 && index < this.letters.length) {
+            this.$emit('alpha', this.letters[index])
+          }
+        }, 16)
       }
     },
     touchend (e) {
@@ -50,6 +56,9 @@ export default {
       }
       return letters
     }
+  },
+  updated () {
+    this.startY = this.$refs['A'][0].offsetTop
   }
 }
 
