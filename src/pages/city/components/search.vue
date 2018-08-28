@@ -7,10 +7,11 @@
     v-show="keyword">
       <ul>
         <li class="search-item border-bottom"
-          v-for="item of list">
+          v-for='item of list' :key='item.id'
+            @click="clickhot(item.name)" >
           {{item.name}}
         </li>
-        <li class="search-item border-bottom" v-show="!list.length">没有匹配数据</li>
+        <li class="search-item border-bottom" v-show="!list.length" >没有匹配数据</li>
       </ul>
     </div>
   </div>
@@ -18,6 +19,7 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import {mapMutations} from 'vuex'
 export default {
   name: 'CitySearch',
   props: {
@@ -31,6 +33,11 @@ export default {
     }
   },
   methods: {
+    clickhot (city) {
+      this.click(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['click'])
   },
   watch: {
     keyword () {

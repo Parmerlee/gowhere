@@ -5,15 +5,15 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="botton-list">
           <div class="botton-wapper">
-            <div class="botton">北京</div>
+            <div class="botton">{{this.currentcity}}</div>
           </div>
         </div>
       </div>
       <div class="area">
         <div class="title border-topbottom">热门城市</div>
         <div class="botton-list">
-          <div class="botton-wapper" v-for="item in hot" :key="item.id">
-            <div class="botton">{{item.name}}</div>
+          <div class="botton-wapper" >
+            <div class="botton" v-for="item in hot" :key="item.id" @click="clickhot(item.name)">{{item.name}}</div>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
       :ref = "key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list" v-for="inner in item" :key="inner.id">
-          <div class="item border-topbottom">{{inner.name}}</div>
+          <div class="item border-topbottom" @click="clickhot(inner.name)">{{inner.name}}</div>
         </div>
       </div>
     </div>
@@ -30,6 +30,7 @@
 
 <script>
 import BScroll from 'better-scroll'
+import {mapState,mapMutations} from 'vuex'
 export default {
   name: 'list',
   props: {
@@ -37,10 +38,21 @@ export default {
     city: {},
     alpha: String
   },
+  computed: {
+    ...mapState({
+      currentcity: 'city'
+    })
+  },
   data () {
     return {}
   },
-  methods: {},
+  methods: {
+    clickhot (city) {
+      this.click(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['click'])
+  },
   mounted () {
     this.scroll = new BScroll(this.$refs.wapper)
     console.log('aaa' + this.city)
@@ -86,13 +98,16 @@ export default {
       padding: .1rem
       .botton-wapper
         flex: auto
-        width: 33.33%
+        /*width: 33.33%*/
         box-sizing: border-box
         .botton
           margin: .1rem
           padding: .1rem 0
           border: .02rem solid #ccc
           border-radius: .1rem
+          /*flex: auto*/
+          width: 33.33%
+          /*box-sizing: border-box*/
     .item-list
       .item
         text-align: start
