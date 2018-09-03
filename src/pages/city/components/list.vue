@@ -30,7 +30,7 @@
 
 <script>
 import BScroll from 'better-scroll'
-import {mapState,mapMutations} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: 'list',
   props: {

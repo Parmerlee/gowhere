@@ -19,7 +19,7 @@ export default{
   components: {SwiperSlide},
   name: 'HomeIcons',
   props: {
-    iconList1: Array
+    iconList1: {}
   },
   computed: {
     pages () {

@@ -19,7 +19,7 @@
 export default{
   name: 'HomeWeekend',
   props: {
-    weekendList: Array
+    weekendList: {}
   },
   data () {
     return {
